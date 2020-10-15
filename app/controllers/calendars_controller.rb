@@ -34,9 +34,18 @@ class CalendarsController < ApplicationController
       plan = plans.map do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      days = { month: (@todays_date  + x).month, date: (@todays_date +x).day, plans: today_plans}
+
+      wdays_plan=Date.today.wday+x
+      if 
+        wdays_plan = wdays_plan - 7
+      end
+      
+     
+      days = { month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans, wday: wdays[wdays_plan]}
       @week_days.push(days)
     end
 
   end
 end
+
+# wday: "(水)"
